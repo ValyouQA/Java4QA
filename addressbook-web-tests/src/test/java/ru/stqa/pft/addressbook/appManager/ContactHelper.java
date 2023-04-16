@@ -25,4 +25,12 @@ public class ContactHelper extends HelperBase{
     type(By.name("byear"), contactData.getBirthYear());
   }
 
+  public void selectContact() {
+    click(By.id("MassCB"));
+  }
+
+  public void deleteSelectedContact() {
+    click(By.xpath("//input[@value='Delete']"));
+    wd.switchTo().alert().accept();
+  }
 }
