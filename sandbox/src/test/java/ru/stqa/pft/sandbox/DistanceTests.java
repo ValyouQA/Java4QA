@@ -12,15 +12,15 @@ public class DistanceTests {
     Assert.assertEquals ( p1.distance(p2), 2);
   }
   @Test
-  public void notNull() {
-    Point p1 = new Point(3, 4);
-    Point p2 = new Point(5, 6);
-    Assert.assertNotNull (p1.distance(p2));
+  public void positiveResponse() {
+    Point p1 = new Point(-5, -4);
+    Point p2 = new Point(-5, 6);
+    Assert.assertEquals ( p1.distance(p2), 10);
   }
   @Test
-  public void isNull() {
+  public void changePoınts() {
     Point p1 = new Point(7, 8);
     Point p2 = new Point(9, 10);
-    Assert.assertNull (p1.distance(p2));
+    Assert.assertEquals ( p1.distance(p2), p2.distance(p1));
   }
 }
