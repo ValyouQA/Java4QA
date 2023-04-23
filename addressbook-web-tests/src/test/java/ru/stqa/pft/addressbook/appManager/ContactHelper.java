@@ -47,4 +47,16 @@ public class ContactHelper extends HelperBase{
   public void submitContactModification() {
     click(By.xpath("//input[22]"));
   }
+
+  public void createContact(ContactData contactData, boolean b) {
+    NavigationHelper nh = new NavigationHelper(wd);
+    nh.goToAddContactPage();
+    fillContactForm(new ContactData("Petr", "Petrovich", "Petrov", "Petrovich home place", "+73988767575", "Petrovich@mail.ru", "20", "August", "1910", "test1"), true);
+    submitContactCreation();
+    nh.goToHomePage();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.xpath("//img[@alt='Edit']"));
+  }
 }
