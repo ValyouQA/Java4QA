@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
+import ru.stqa.pft.addressbook.models.GroupData;
 
 public class ContactHelper extends HelperBase{
 
@@ -15,6 +16,21 @@ public class ContactHelper extends HelperBase{
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
+    if (creation) {
+      if (isThereAGroup(contactData)){
+        selectDDM(By.name("new_group"), contactData.getGroup());
+      } else {
+        GroupHelper gh = new GroupHelper(wd);
+        gh.createGroup(new GroupData(contactData.getGroup(), null, null));
+        NavigationHelper nh = new NavigationHelper(wd);
+        nh.goToAddContactPage();
+        selectDDM(By.name("new_group"), contactData.getGroup());
+      }
+
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
+
     type(By.name("firstname"), contactData.getName());
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("lastname"), contactData.getLastname());
@@ -24,11 +40,10 @@ public class ContactHelper extends HelperBase{
     selectDDM(By.name("bday"), contactData.getBirthDay());
     selectDDM(By.name("bmonth"), contactData.getBirthMonth());
     type(By.name("byear"), contactData.getBirthYear());
-    if (creation) {
-      selectDDM(By.name("new_group"), contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+  }
+
+  private boolean isThereAGroup(ContactData contactData) {
+    return isGroupPresent(By.name("new_group"), contactData.getGroup());
   }
 
   public void selectContact() {
@@ -48,10 +63,10 @@ public class ContactHelper extends HelperBase{
     click(By.xpath("//input[22]"));
   }
 
-  public void createContact(ContactData contactData, boolean b) {
+  public void createContact(ContactData contactData) {
     NavigationHelper nh = new NavigationHelper(wd);
     nh.goToAddContactPage();
-    fillContactForm(new ContactData("Petr", "Petrovich", "Petrov", "Petrovich home place", "+73988767575", "Petrovich@mail.ru", "20", "August", "1910", "test1"), true);
+    fillContactForm(contactData, true);
     submitContactCreation();
     nh.goToHomePage();
   }

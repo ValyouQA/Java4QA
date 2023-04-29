@@ -45,6 +45,16 @@ public class HelperBase {
     new Select(wd.findElement(locator)).selectByVisibleText(rowName);
   }
 
+  protected boolean isGroupPresent(By locator, String rowName) {
+    try{
+      new Select(wd.findElement(locator)).selectByVisibleText(rowName);
+      return true;
+    } catch (NoSuchElementException ex) {
+      return false;
+    }
+
+  }
+
   protected boolean isElementPresent(By locator) {
     try{
       wd.findElement(locator);

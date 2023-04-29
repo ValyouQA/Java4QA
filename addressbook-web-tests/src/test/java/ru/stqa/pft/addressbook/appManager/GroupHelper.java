@@ -45,6 +45,8 @@ public class GroupHelper extends HelperBase {
   }
 
   public void createGroup(GroupData group) {
+    NavigationHelper nh = new NavigationHelper(wd);
+    nh.goToGroupPage();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
