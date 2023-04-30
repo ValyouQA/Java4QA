@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appManager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.GroupData;
 
 public class GroupHelper extends HelperBase {
@@ -47,10 +48,17 @@ public class GroupHelper extends HelperBase {
   public void createGroup(GroupData group) {
     NavigationHelper nh = new NavigationHelper(wd);
     nh.goToGroupPage();
+    int before = getGroupCount();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     returnToGroupPage();
+    int after = getGroupCount();
+    Assert.assertEquals(after, before + 1);
+  }
+
+  public int getGroupCount() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 
   public boolean isThereAGroup() {
