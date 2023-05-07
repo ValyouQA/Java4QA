@@ -47,7 +47,7 @@ public class ContactHelper extends HelperBase{
   }
 
   public void selectContact() {
-    click(By.id("MassCB"));
+    click(By.name("selected[]"));
   }
 
   public void deleteSelectedContact() {
@@ -65,10 +65,17 @@ public class ContactHelper extends HelperBase{
 
   public void createContact(ContactData contactData) {
     NavigationHelper nh = new NavigationHelper(wd);
+    int before = ContactsCount();
     nh.goToAddContactPage();
     fillContactForm(contactData, true);
     submitContactCreation();
     nh.goToHomePage();
+    int after = ContactsCount();
+    Assert.assertEquals(after, before + 1);
+  }
+
+  public int ContactsCount() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 
   public boolean isThereAContact() {
