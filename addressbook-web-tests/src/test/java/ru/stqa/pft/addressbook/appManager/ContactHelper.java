@@ -25,9 +25,9 @@ public class ContactHelper extends HelperBase{
         selectDDM(By.name("new_group"), contactData.getGroup());
       } else {
         GroupHelper gh = new GroupHelper(wd);
-        gh.createGroup(new GroupData(contactData.getGroup(), null, null));
+        gh.create(new GroupData().withName(contactData.getGroup()));
         NavigationHelper nh = new NavigationHelper(wd);
-        nh.goToAddContactPage();
+        nh.addContactPage();
         selectDDM(By.name("new_group"), contactData.getGroup());
       }
 
@@ -65,9 +65,16 @@ public class ContactHelper extends HelperBase{
 
   public void create(ContactData contact) {
     NavigationHelper nh = new NavigationHelper(wd);
-    nh.goToAddContactPage();
+    nh.addContactPage();
     fillContactForm(contact, true);
     submitContactCreation();
+    nh.homePage();
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContact();
+    NavigationHelper nh = new NavigationHelper(wd);
     nh.homePage();
   }
 
@@ -90,9 +97,5 @@ public class ContactHelper extends HelperBase{
       contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
-  }
-
-  public boolean isThereAContact() {
-    return isElementPresent(By.xpath("//img[@alt='Edit']"));
   }
 }
