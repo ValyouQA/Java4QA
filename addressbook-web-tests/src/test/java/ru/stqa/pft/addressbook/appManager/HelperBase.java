@@ -8,15 +8,12 @@ import org.openqa.selenium.support.ui.Select;
 
 public class HelperBase {
   protected WebDriver wd;
-
   public HelperBase(WebDriver wd) {
     this.wd = wd;
   }
-
   protected void click(By locator) {
     wd.findElement(locator).click();
   }
-
   protected void type(By locator, String text) {
     click(locator);
     if (text != null){
@@ -29,7 +26,6 @@ public class HelperBase {
     }
 
   }
-
   public boolean isAlertPresent () {
     try {
       wd.switchTo().alert();
@@ -39,12 +35,10 @@ public class HelperBase {
       return false;
     }
   }
-
   protected void selectDDM(By locator, String rowName) {
     wd.findElement(locator).click();
     new Select(wd.findElement(locator)).selectByVisibleText(rowName);
   }
-
   protected boolean isGroupPresent(By locator, String rowName) {
     try{
       new Select(wd.findElement(locator)).selectByVisibleText(rowName);
@@ -54,7 +48,6 @@ public class HelperBase {
     }
 
   }
-
   protected boolean isElementPresent(By locator) {
     try{
       wd.findElement(locator);

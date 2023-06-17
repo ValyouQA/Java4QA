@@ -7,9 +7,12 @@ public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstname;
   private String lastname;
+  private String mobPhoneNumber;
+  private String workPhoneNumber;
   private String homePhoneNumber;
   private String email;
   private String group;
+  private String allPhones;
 
   public int getId(){
     return id;
@@ -17,6 +20,11 @@ public class ContactData {
 
   public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
     return this;
   }
   public ContactData withFirstname(String firstname) {
@@ -29,6 +37,14 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withMobPhoneNumber(String mobPhoneNumber) {
+    this.mobPhoneNumber = mobPhoneNumber;
+    return this;
+  }
+  public ContactData withWorkPhoneNumber(String workPhoneNumber) {
+    this.workPhoneNumber = workPhoneNumber;
+    return this;
+  }
   public ContactData withHomePhoneNumber(String homePhoneNumber) {
     this.homePhoneNumber = homePhoneNumber;
     return this;
@@ -45,6 +61,35 @@ public class ContactData {
   }
 
 
+  public String getFirstname() {
+    return firstname;
+  }
+
+  public String getLastname() {
+    return lastname;
+  }
+
+  public String getMobPhoneNumber() {
+    return mobPhoneNumber;
+  }
+  public String getWorkPhoneNumber() {
+    return workPhoneNumber;
+  }
+  public String getHomePhoneNumber() {
+    return homePhoneNumber;
+  }
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -56,26 +101,6 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(id, firstname, lastname);
-  }
-
-  public String getFirstname() {
-    return firstname;
-  }
-
-  public String getLastname() {
-    return lastname;
-  }
-
-  public String getHomePhoneNumber() {
-    return homePhoneNumber;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public String getGroup() {
-    return group;
   }
 
   @Override
