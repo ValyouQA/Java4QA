@@ -1,17 +1,5 @@
 [
   {
-    "firstname": "Firstname 0",
-    "lastname": "Lastname 0",
-    "mobPhoneNumber": "+7999654085 0",
-    "workPhoneNumber": "43-03-0 0",
-    "homePhoneNumber": "10-20-0 0",
-    "email": "Email1@mail.ru 0",
-    "email2": "Email2@mail.ru 0",
-    "email3": "Email3@mail.ru 0",
-    "group": "test1",
-    "address": "Улица Пушкина дом Колотушкина № 0"
-  },
-  {
     "firstname": "Firstname 1",
     "lastname": "Lastname 1",
     "mobPhoneNumber": "+7999654085 1",
@@ -22,30 +10,6 @@
     "email3": "Email3@mail.ru 1",
     "group": "test1",
     "address": "Улица Пушкина дом Колотушкина № 1"
-  },
-  {
-    "firstname": "Firstname 2",
-    "lastname": "Lastname 2",
-    "mobPhoneNumber": "+7999654085 2",
-    "workPhoneNumber": "43-03-0 2",
-    "homePhoneNumber": "10-20-0 2",
-    "email": "Email1@mail.ru 2",
-    "email2": "Email2@mail.ru 2",
-    "email3": "Email3@mail.ru 2",
-    "group": "test1",
-    "address": "Улица Пушкина дом Колотушкина № 2"
-  },
-  {
-    "firstname": "Firstname 3",
-    "lastname": "Lastname 3",
-    "mobPhoneNumber": "+7999654085 3",
-    "workPhoneNumber": "43-03-0 3",
-    "homePhoneNumber": "10-20-0 3",
-    "email": "Email1@mail.ru 3",
-    "email2": "Email2@mail.ru 3",
-    "email3": "Email3@mail.ru 3",
-    "group": "test1",
-    "address": "Улица Пушкина дом Колотушкина № 3"
   },
   {
     "firstname": "Firstname 4",
