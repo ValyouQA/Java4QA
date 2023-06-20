@@ -56,6 +56,9 @@ public class ContactData {
   @Column(name = "address")
   @Type(type = "text")
   private String address;
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
 
   @Override
   public String toString() {
@@ -65,10 +68,6 @@ public class ContactData {
             ", lastname='" + lastname + '\'' +
             '}';
   }
-
-  @Column(name = "photo")
-  @Type(type = "text")
-  private String photo;
 
 
   public int getId(){
