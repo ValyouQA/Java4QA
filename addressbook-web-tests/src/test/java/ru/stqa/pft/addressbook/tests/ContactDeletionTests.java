@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -14,8 +16,9 @@ public class ContactDeletionTests extends TestBase{
   public void ensurePreconditions(){
     if (app.db().contacts().size() == 0){
       app.goTo().homePage();
+      File photo = new File("src/test/resources/photo.png");
       app.contact().create(new ContactData().withFirstname("Petr").withLastname("Petrov").withMobPhoneNumber("+73988767575")
-              .withEmail("Petrovich@mail.ru").withGroup("test1"));
+              .withEmail("Petrovich@mail.ru").withGroup("test1").withPhoto(photo));
     }
   }
   @Test

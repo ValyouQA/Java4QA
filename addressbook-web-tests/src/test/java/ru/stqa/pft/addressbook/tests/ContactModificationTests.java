@@ -16,8 +16,9 @@ public class ContactModificationTests extends TestBase{
   public void ensurePreconditions(){
     if (app.db().contacts().size() == 0){
       app.goTo().homePage();
+      File photo = new File("src/test/resources/photo.png");
       app.contact().create(new ContactData().withFirstname("Petr").withLastname("Petrov").withMobPhoneNumber("+73988767575")
-              .withEmail("Petrovich@mail.ru").withGroup("test1"));
+              .withEmail("Petrovich@mail.ru").withGroup("test1").withPhoto(photo));
     }
   }
 

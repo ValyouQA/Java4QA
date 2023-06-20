@@ -25,8 +25,9 @@ public class ContactHelper extends HelperBase{
         selectDDM(By.name("new_group"), contactData.getGroup());
       } else {
         GroupHelper gh = new GroupHelper(wd);
-        gh.create(new GroupData().withName(contactData.getGroup()));
         NavigationHelper nh = new NavigationHelper(wd);
+        nh.groupPage();
+        gh.create(new GroupData().withName(contactData.getGroup()));
         nh.addContactPage();
         selectDDM(By.name("new_group"), contactData.getGroup());
       }
