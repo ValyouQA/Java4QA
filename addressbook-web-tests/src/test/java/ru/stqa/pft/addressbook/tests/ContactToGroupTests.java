@@ -15,9 +15,8 @@ public class ContactToGroupTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().contacts().size() == 0 | app.db().groups().size() == 0 | app.db().verifyContactNotInGroup().size() != 0) { //данные из базы (.db().)
+    if (app.db().contacts().size() == 0 | app.db().groups().size() == 0 | app.db().verifyContactNotInGroup().size() != 0) {
       app.createGroupIfNot();
-      ContactData contact = new ContactData();
       File photo = new File("src/test/resources/photo.png");
       app.goTo().homePage();
       app.contact().create(new ContactData().withFirstname("Iosif").withLastname("Ayranovich").withPhoto(photo));

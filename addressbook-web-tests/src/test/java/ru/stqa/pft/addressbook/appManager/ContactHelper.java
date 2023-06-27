@@ -42,6 +42,15 @@ public class ContactHelper extends HelperBase{
     type(By.name("address"), contactData.getAddress());
     attach(By.name("photo"), contactData.getPhoto());
   }
+  public void getGroupData(GroupData groupData) {
+    click(By.xpath(String.format("//select[@name='group']/option[text() = '%s']", groupData.getName())));;
+  }
+  public void selectContact(ContactData contact) {
+    click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+  }
+  public void removeContactFromGroup() {
+    click(By.name("remove"));
+  }
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
   }

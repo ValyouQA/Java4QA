@@ -90,4 +90,44 @@ public class DbHelper {
       System.out.println("VendorError: " + ex.getErrorCode());
     } return new Contacts();
   }
+  public Contacts verifyContactInGroup() {
+    Connection conn = null;
+    try {
+      conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?user=root&password=");
+      Statement st = conn.createStatement();
+      ResultSet rs = st.executeQuery("select addressbook.id, firstname, lastname, address, home, mobile" +
+              ", work, phone2, email, email2, email3 from addressbook " +
+              "join address_in_groups ON addressbook.id=address_in_groups.id");
+      Contacts contacts = new Contacts();
+      while (rs.next()) {
+        contacts.add(new ContactData().withId(rs.getInt("id")).withFirstname(rs.getString("firstname"))
+                .withLastname(rs.getString("lastname")).withAddress(rs.getString("address"))
+                .withHomePhoneNumber(rs.getString("home")).withMobPhoneNumber(rs.getString("mobile"))
+                .withWorkPhoneNumber(rs.getString("work")).withEmail(rs.getString("email")).withEmail2(rs.getString("email2"))
+                .withEmail3(rs.getString("email3")));
+      }
+      rs.close();
+      st.close();
+      conn.close();
+
+      //System.out.println(contacts);
+      return new Contacts(contacts);
+
+      // Do something with the Connection
+
+    } catch (SQLException ex) {
+      // handle any errors
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("VendorError: " + ex.getErrorCode());
+    } return new Contacts();
+  }
+  public ContactData contactWithGroup() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where groups.size > 0 and deprecated = '0000-00-00'").list();
+    session.getTransaction().commit();
+    session.close();
+    return result.iterator().next();
+  }
 }
