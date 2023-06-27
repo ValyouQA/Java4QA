@@ -7,6 +7,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.GroupData;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -21,19 +22,13 @@ public class ContactHelper extends HelperBase{
 
   public void fillContactForm(ContactData contactData, boolean creation) {
     if (creation) {
-      if (isThereAGroup(contactData)){
-        selectDDM(By.name("new_group"), contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
       } else {
-        GroupHelper gh = new GroupHelper(wd);
-        NavigationHelper nh = new NavigationHelper(wd);
-        nh.groupPage();
-        gh.create(new GroupData().withName(contactData.getGroup()));
-        nh.addContactPage();
-        selectDDM(By.name("new_group"), contactData.getGroup());
+        Assert.assertTrue(isElementPresent(By.name("new_group")));
       }
-
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
 
     type(By.name("firstname"), contactData.getFirstname());
@@ -47,11 +42,6 @@ public class ContactHelper extends HelperBase{
     type(By.name("address"), contactData.getAddress());
     attach(By.name("photo"), contactData.getPhoto());
   }
-
-  private boolean isThereAGroup(ContactData contactData) {
-    return isGroupPresent(By.name("new_group"), contactData.getGroup());
-  }
-
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
   }
@@ -135,5 +125,15 @@ public class ContactHelper extends HelperBase{
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).
             withHomePhoneNumber(home).withMobPhoneNumber(mobile).withWorkPhoneNumber(work).withAddress(address)
             .withEmail(email).withEmail2(email2).withEmail3(email3);
+  }
+  public void selectContactWithoutGroup(ContactData contact) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[none]");
+    click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+  }
+  public void selectGroup(GroupData group) {
+    wd.findElement(By.xpath(String.format("//select[@name='to_group']/option[@value='%s']", group.getId()))).click();
+  }
+  public void addContactToGroup() {
+    click(By.name("add"));
   }
 }

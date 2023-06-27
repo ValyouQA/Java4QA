@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 
@@ -40,19 +39,6 @@ public class HelperBase {
     catch (NoAlertPresentException e) {
       return false;
     }
-  }
-  protected void selectDDM(By locator, String rowName) {
-    wd.findElement(locator).click();
-    new Select(wd.findElement(locator)).selectByVisibleText(rowName);
-  }
-  protected boolean isGroupPresent(By locator, String rowName) {
-    try{
-      new Select(wd.findElement(locator)).selectByVisibleText(rowName);
-      return true;
-    } catch (NoSuchElementException ex) {
-      return false;
-    }
-
   }
   protected boolean isElementPresent(By locator) {
     try{

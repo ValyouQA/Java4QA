@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Browser;
+import ru.stqa.pft.addressbook.models.GroupData;
 
 import java.io.File;
 import java.io.FileReader;
@@ -26,6 +27,12 @@ public class ApplicationManager {
   public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
+  }
+  public void createGroupIfNot() {
+    goTo().groupPage();
+    if (db().groups().size() == 0) { //данные из базы (.db().)
+      group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
+    }
   }
 
   public void init() throws IOException {
