@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.models.Groups;
 
 import java.io.File;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class ContactFromGroupDelTests extends TestBase {
 
@@ -41,15 +41,16 @@ public class ContactFromGroupDelTests extends TestBase {
   public void testDeletionContactFromGroup(){
     ContactData before = app.db().contactWithGroup();
     GroupData group = before.getGroups().iterator().next();
-    Groups groupsBeforeDeletion = before.getGroups();
     app.goTo().homePage();
     app.contact().getGroupData(group);
     app.contact().selectContact(before);
     app.contact().removeContactFromGroup();
     app.goTo().homePage();
-    ContactData freshDataContact = app.db().contacts().iterator().next();
+
+    ContactData freshDataContact = app.db().getContactById(before.getId());
     Groups groupsAfterDeletion = freshDataContact.getGroups();
-    assertEquals(groupsBeforeDeletion.size() - 1, groupsAfterDeletion.size());
+    assertFalse(groupsAfterDeletion.contains(group));
+
     verifyContactListInUI();
   }
 }

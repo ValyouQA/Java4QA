@@ -130,4 +130,14 @@ public class DbHelper {
     session.close();
     return result.iterator().next();
   }
+  public ContactData getContactById(int contactId) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    ContactData contact = (ContactData) session.createQuery("from ContactData where id = :id and deprecated = '0000-00-00'")
+            .setParameter("id", contactId)
+            .uniqueResult();
+    session.getTransaction().commit();
+    session.close();
+    return contact;
+  }
 }
