@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -17,10 +18,11 @@ public class ContactRowsTests extends TestBase {
   public void ensurePrecondition() {
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
+      File photo = new File("src/test/resources/photo.png");
       app.contact().create(new ContactData().withFirstname("Azaryan").withLastname("Pagoyan")
               .withMobPhoneNumber("+79379990676").withWorkPhoneNumber("355-00-35").withHomePhoneNumber("43 20 30")
               .withEmail("Ostrovok-123@mail.ru").withEmail2("Что-то+на0кирилице42@mail.ru")
-              .withEmail3("Poplovok_netonushiy42@mail.ru").withAddress("Улица Пушкина дом Колотушкина"));
+              .withEmail3("Poplovok_netonushiy42@mail.ru").withAddress("Улица Пушкина дом Колотушкина").withPhoto(photo));
     }
   }
 

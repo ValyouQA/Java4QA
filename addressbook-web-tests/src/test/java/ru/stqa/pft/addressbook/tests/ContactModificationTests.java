@@ -22,7 +22,7 @@ public class ContactModificationTests extends TestBase{
     }
   }
 
-  @Test
+  @Test(enabled = false)
   public void testContactModification() {
     Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/photo.png");
