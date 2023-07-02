@@ -23,9 +23,9 @@ public class TestBase {
   public boolean isIssueOpen(int issueId) throws IOException {
     Set<Issue> issues = getIssueById(issueId);
     if (issues.iterator().next().getState_name().equals("Closed")) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
   }
 
